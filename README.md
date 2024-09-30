@@ -1,2 +1,3 @@
 # FeatherOS
-minimalist os
+Minimalist os<br>
+(written in assembly)<br>
