@@ -2,8 +2,8 @@
 Minimalist os<br>
 (written in assembly)<br>
 
-## Dependencies (and how to install):<br>
+## Dependencies:<br>
 - QEMU<br>
 - NASM<br>
-### How to install:<br>
+### How to install dependencies:<br>
 `sudo apt install qemu-system nasm`<br>
