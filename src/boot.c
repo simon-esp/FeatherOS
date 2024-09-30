@@ -1,24 +1,14 @@
-void print(const char* str) {
-    while (*str) {
-        asm volatile (
-            "mov ah, 0x0E \n"    // BIOS teletype function
-            "mov al, %[character] \n"
-            "int 0x10"
-            :
-            : [character] "r"(*str)
-        );
-        str++;
+// bootloader.c
+void main() {
+    char *video_memory = (char *) 0xb8000;  // VGA memory
+    const char *message = "Hello, World!";
+    
+    // Print the message to the screen
+    for (int i = 0; message[i] != '\0'; ++i) {
+        video_memory[i * 2] = message[i];    // Character
+        video_memory[i * 2 + 1] = 0x07;       // Attribute (light grey on black background)
     }
-}
 
-void wait_for_key() {
-    asm volatile (
-        "mov ah, 0x00 \n"
-        "int 0x16"                // BIOS interrupt to wait for a keypress
-    );
-}
-
-void c_main() {
-    print("It works! Press any key to continue...");
-    wait_for_key();
+    // Infinite loop to keep the bootloader running
+    while (1);
 }
